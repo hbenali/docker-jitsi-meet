@@ -3,7 +3,7 @@ FROM ${JITSI_REPO}/base
 
 ADD https://dl.eff.org/certbot-auto /usr/local/bin/
 
-COPY rootfs/ /
+COPY web/rootfs/ /
 
 RUN \
 	apt-dpkg-wrap apt-get update && \
@@ -16,10 +16,6 @@ RUN \
 	rm -f /etc/nginx/conf.d/default.conf && \
 	rm -rf /tmp/pkg /var/cache/apt
 
-RUN \
-	chmod a+x /usr/local/bin/certbot-auto && \
-	certbot-auto --noninteractive --install-only
-
 EXPOSE 80 443
 
-VOLUME ["/config", "/etc/letsencrypt", "/usr/share/jitsi-meet/transcripts"]
+VOLUME ["/etc/letsencrypt", "/usr/share/jitsi-meet/transcripts"]
