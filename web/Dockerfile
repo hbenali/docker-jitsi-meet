@@ -3,7 +3,7 @@ ARG BASE_TAG=latest
 FROM ${JITSI_REPO}/base:${BASE_TAG}
 
 ADD https://raw.githubusercontent.com/acmesh-official/acme.sh/2.8.8/acme.sh /opt
-COPY rootfs/ /
+COPY web/rootfs/ /
 
 RUN \
 	apt-dpkg-wrap apt-get update && \
@@ -18,4 +18,4 @@ RUN \
 
 EXPOSE 80 443
 
-VOLUME ["/config", "/usr/share/jitsi-meet/transcripts"]
+VOLUME ["/etc/letsencrypt", "/usr/share/jitsi-meet/transcripts"]
