@@ -1,8 +1,9 @@
 ARG JITSI_REPO=jitsi
 FROM ${JITSI_REPO}/base
 
-ADD https://raw.githubusercontent.com/acmesh-official/acme.sh/2.8.8/acme.sh /opt
-COPY rootfs/ /
+ADD https://dl.eff.org/certbot-auto /usr/local/bin/
+
+COPY web/rootfs/ /
 
 RUN \
 	apt-dpkg-wrap apt-get update && \
@@ -17,4 +18,4 @@ RUN \
 
 EXPOSE 80 443
 
-VOLUME ["/config", "/usr/share/jitsi-meet/transcripts"]
+VOLUME ["/etc/letsencrypt", "/usr/share/jitsi-meet/transcripts"]
